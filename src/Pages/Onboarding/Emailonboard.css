@@ -1,0 +1,92 @@
+.onboard-head{
+    color: #1B1C1F;
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+}
+.onboard-text{
+    margin-top: 8px;
+    color: var(--neutral-secondary, #767E8C);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+}
+.onboard-form{
+    margin-top: 48px;
+}
+.onboard-form form{
+    width: 100%;
+}
+.form-1{
+    width: 100%;
+    margin-bottom: 24px;
+}
+.form-1 label{
+    color: #1B1C1F;
+    font-family: "SF Pro Display";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem; /* 125% */
+}
+.inputfield{
+    margin-top: 12px;
+    width: 100%;
+    padding: 1.25rem;
+    border-radius: 6px;
+    border: 1px solid var(--neutral-line, #E0E5ED);
+    background: var(--neutral-background, #F6F7F9);
+    color: var(--neutral-ghost, #A9B0C5);
+    font-family: "SF Pro Display";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input-password{
+    margin-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    border-radius: 6px;
+    border: 1px solid var(--neutral-line, #E0E5ED);
+    background: var(--neutral-background, #F6F7F9);
+    color: var(--neutral-ghost, #A9B0C5);
+    font-family: "SF Pro Display";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.input-password input{
+    width: 100%;
+    border: none;
+    background-color: transparent;
+    color: var(--neutral-ghost, #A9B0C5);
+    font-family: "SF Pro Display";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.submit{
+    position: absolute;
+    bottom: 2rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    border: none;
+    background: var(--brand-primary-default, #34b4ec);
+    color: var(--neutral-white, #FFF);
+    text-align: center;
+    font-family: "SF Pro Display";
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+}
