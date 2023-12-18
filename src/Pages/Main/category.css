@@ -1,0 +1,20 @@
+.todo-head-nav nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    /* background-color: antiquewhite; */
+}
+.nav-set{
+    list-style: none;
+    color: #1B1C1F;
+    font-family: "SF Pro Display";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+.nav-active{
+    color: #34b5ec;
+}

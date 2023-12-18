@@ -1,26 +1,84 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Create.css'
 import {FiEyeOff} from 'react-icons/fi'
-const Create = () => {
+import { signupaction } from '../../Redux/Auth/Signup/SignupAction';
+import { connect } from 'react-redux';
+import { useState } from 'react';
+import LottieAnimation from '../../lotties';
+import loading1 from '../../Assets/loader.json'
+const Create = ({signup, loading, error}) => {
+    const history = useNavigate();
+    const [errors, seterrors] = useState(false)
+    const [email, setemail] = useState('')
+    const [username, setusername] = useState('')
+    const [password, setpassword] = useState('')
+    const [poststate, setPostState] = useState({})
+
+    const handleemail = (e) =>{
+        const value = e.target.value
+        setemail(value)
+        setPostState({...poststate, ...{email}})
+    }
+    const handleusername = (e) =>{
+        const value = e.target.value
+        setusername(value)
+        setPostState({...poststate, ...{username}})
+    }
+    const handlepassword = (e) =>{
+        const value = e.target.value
+        setpassword(value)
+        setPostState({...poststate, ...{password}})
+    }
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+            await signup(poststate, ()=>{
+                history('/todo')
+            }, ()=>{
+                seterrors(true);
+            })
+        }catch(error){
+        }
+        
+    }
     return ( 
         <div className="create onboard">
             <div className="onboard-inner">
                 <h2 className="onboard-head">Create account</h2>
                 <p className="onboard-text">Create your account and feel the benefits</p>
                 <div className="onboard-form">
-                    <form>
+                    <form onSubmit={handleSubmit}>
+                        <div className="form-1">
+                            <label>Email Address </label><br></br>
+                            <input onChange={handleemail} onBlur={handleemail} type="email" className='inputfield'  placeholder="name@example.com" required></input>
+                        </div>
                         <div className="form-1">
                             <label>Username</label><br></br>
-                            <input className='inputfield' type="text" placeholder="Enter your username"></input>
+                            <input onChange={handleusername} onBlur={handleusername}  className='inputfield' type="text" placeholder="Enter your username"  required></input>
                         </div>
                         <div className="form-1">
                             <label>Password</label><br></br>
                             <div className="input-password">
-                                <input type="text" placeholder="Enter your password"></input>
+                                <input onChange={handlepassword} onBlur={handlepassword}  type="password" placeholder="Enter your password"  required></input>
                                 <FiEyeOff/>
                             </div>  
                         </div>
-                        <Link to="/todo"><button className="submit">Sign Up</button></Link>
+                        {(!errors) ?(<></>) : (
+                             <div className="error">
+                                <p>{error}</p>
+                            </div>
+                        )}
+                       
+                        {loading ? (
+                            <button  className="submit">
+                                <div className="loading-2">
+                                    <LottieAnimation data={loading1} />
+                                </div>
+                            </button>
+                        ) : (
+                            <button  className="submit">Sign Up</button>
+                        )}
+                        <p className='already'>Already have an account? <Link to='/login'><span>Login Here</span></Link></p>
                     </form>
                 </div>
             </div>
@@ -75,5 +133,18 @@ const Create = () => {
         </div>
     );
 }
- 
-export default Create;
+
+const mapStoreToProps = (state) => {
+    return {
+        loading: state?.signup?.loading,
+        error: state?.signup?.error
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        signup: (poststate, history,errors) => dispatch(signupaction(poststate, history,errors)),
+    };
+};
+
+
+export default connect(mapStoreToProps, mapDispatchToProps)(Create);

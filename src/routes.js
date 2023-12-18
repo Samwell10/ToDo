@@ -4,6 +4,7 @@ import Onboard from "./Pages/Onboarding/Onboard";
 import Create from './Pages/Onboarding/Create';
 import Main from './Pages/Main/Main';
 import ToDo from './Pages/Main/ToDo';
+import Category from './Pages/Main/category';
 
 export default function Router() {
   const routes = useRoutes([
@@ -12,7 +13,7 @@ export default function Router() {
       element: <Onboard/>,
     },
     {
-        path: '/email',
+        path: '/login',
         element: <Emailonboard/>,
     },
     {
@@ -26,6 +27,10 @@ export default function Router() {
     {
       path: '/list',
       element: <ToDo/>,
+    },
+    {
+      path: '/category',
+      element: <Category/>,
     },
   ]);
   

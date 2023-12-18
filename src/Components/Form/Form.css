@@ -63,12 +63,14 @@
     border-bottom: 2px solid #E0E5ED;
 }
 .dropdown{
+    width: 100%;
     margin-top: 30px;
     position: absolute;
     background-color: white;
     padding: 0.8rem;
 }
 .dropdown p{
+    width: 80%;
     padding: 0.6rem 0rem 0.6rem 0rem;
     font-family: "SF Pro Display";
     font-size: 0.75rem;
@@ -89,8 +91,8 @@
 .submit-todo{
     margin-top: 15px;
     display: flex;
-    justify-content: right;
-
+    justify-content: space-between;
+    align-items: center;
 }
 .send{
     width: 50px;

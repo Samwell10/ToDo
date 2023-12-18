@@ -1,0 +1,15 @@
+.error{
+    margin-top: 80px;
+    width: 100%;
+    padding: 1rem;
+    background-color: whitesmoke;
+    border: 0.8px solid rgba(255, 0, 0, 0.21);
+    border-radius: 10px;
+}
+.error p{
+    color: rgba(245, 100, 100, 0.785);
+    font-family: "SF Pro Display";
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+}

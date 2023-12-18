@@ -1,18 +1,70 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Emailonboard.css"
-const Emailonboard = () => {
+import { loginaction } from "../../Redux/Auth/Login/LoginAction";
+import { connect } from "react-redux";
+import { useState } from "react";
+import LottieAnimation from "../../lotties";
+import loading1 from '../../Assets/loader.json'
+const Emailonboard = ({loginaction, loading, error}) => {
+    const history = useNavigate();
+    const [errors, seterrors] = useState(false)
+    const [email, setemail] = useState('')
+    const [password, setpassword] = useState('')
+    const [poststate, setPostState] = useState({})
+    const handleemail = (e) =>{
+        const value = e.target.value
+        setemail(value)
+        setPostState({...poststate, ...{email}})
+    }
+    const handlepassword = (e) =>{
+        const value = e.target.value
+        setpassword(value)
+        setPostState({...poststate, ...{password}})
+    }
+    const handleSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+            await loginaction(poststate, ()=>{
+                history('/todo')
+            },()=>{
+                seterrors(true);
+            })
+        }catch(error){
+        }
+        
+    }
     return ( 
         <div className="emailonboard onboard">
             <div className="onboard-inner">
                 <h2 className="onboard-head">Welcome Back!</h2>
                 <p className="onboard-text">Your work faster and structured with DoItApp</p>
                 <div className="onboard-form">
-                    <form>
+                    <form onSubmit={handleSubmit}>
                         <div className="form-1">
                             <label>Email Address </label><br></br>
-                            <input type="email" className='inputfield'  placeholder="name@example.com" ></input>
+                            <input type="email" onChange={handleemail} onBlur={handleemail} className='inputfield'  placeholder="name@example.com" ></input>
                         </div>
-                        <Link to="/create"><button className="submit">Next</button></Link>
+                        <div className="form-1">
+                            <label>Password </label><br></br>
+                            <input type="password" onChange={handlepassword} onBlur={handlepassword} className='inputfield'  placeholder="********" ></input>
+                        </div>
+
+                        {(!errors) ?(<></>) : (
+                             <div className="error">
+                                <p>{error}</p>
+                            </div>
+                        )}
+
+                         {loading ? (
+                            <button  className="submit">
+                                <div className="loading-2">
+                                    <LottieAnimation data={loading1} />
+                                </div>
+                            </button>
+                        ) : (
+                            <button  className="submit">Login</button>
+                        )}
+                        <p className='already'>Don't have an account? <Link to='/create'><span>SignUp Here</span></Link></p>
                     </form>
                 </div>
             </div>
@@ -67,5 +119,15 @@ const Emailonboard = () => {
         </div>
     );
 }
- 
-export default Emailonboard;
+const mapStoreToProps = (state) => {
+    return {
+        loading: state?.login?.loading,
+        error: state?.login?.error
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginaction: (poststate, history,errors) => dispatch(loginaction(poststate, history,errors)),
+    };
+};
+export default connect(mapStoreToProps, mapDispatchToProps)(Emailonboard);
